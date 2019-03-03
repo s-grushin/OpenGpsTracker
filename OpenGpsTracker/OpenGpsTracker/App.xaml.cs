@@ -11,7 +11,7 @@ namespace OpenGpsTracker
         {
             InitializeComponent();
 
-            MainPage = new MyPage();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

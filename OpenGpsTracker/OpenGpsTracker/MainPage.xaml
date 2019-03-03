@@ -1,14 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:OpenGpsTracker"
-             x:Class="OpenGpsTracker.MainPage">
+             x:Class="OpenGpsTracker.MainPage"
+             Title="OpenGpsTracker">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms! And hello world!!!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <MasterDetailPage.Master>
+        <ContentPage Title="Master" BackgroundColor="Aqua">
+            
+            <ContentPage.Content>
+                <StackLayout Padding="5,30,5,5">
+                    <Button Text="Настройки"></Button>                    
+                    <Button Text="Выход"></Button>                                    
+                </StackLayout>                
+            </ContentPage.Content>        
+            
+        </ContentPage>
+    </MasterDetailPage.Master>
 
-</ContentPage>
+    <MasterDetailPage.Detail>
+        <ContentPage Title="Master" BackgroundColor="Aqua">
+            <ContentPage.Content>
+                <StackLayout Padding="5,30,5,5">
+                    <Label Text="Detail Page" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                </StackLayout>
+            </ContentPage.Content>
+
+        </ContentPage>
+    </MasterDetailPage.Detail>
+    
+
+</MasterDetailPage>

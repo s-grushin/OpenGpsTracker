@@ -7,6 +7,6 @@
             <Label Text="Welcome to Xamarin.Forms! This is my page"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        </StackLayout> 
     </ContentPage.Content>
 </ContentPage>
