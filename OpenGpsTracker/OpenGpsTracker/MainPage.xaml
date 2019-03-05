@@ -10,7 +10,8 @@
             
             <ContentPage.Content>
                 <StackLayout Padding="5,30,5,5">
-                    <Button Text="Настройки"></Button>                    
+                    <Button Text="Показать карту" x:Name="btnShowMap" Clicked="BtnShowMap_Clicked"></Button>  
+                    <Button Text="Настройки" x:Name="btnSettings" Clicked="BtnSettings_Clicked"></Button>                    
                     <Button Text="Выход"></Button>                                    
                 </StackLayout>                
             </ContentPage.Content>        
