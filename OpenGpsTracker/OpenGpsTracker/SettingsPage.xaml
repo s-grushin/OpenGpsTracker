@@ -3,14 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenGpsTracker.SettingsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Адрес сервера"></Label>
-            <Entry Text="http://private.opengts.com.ua:8080/track/Service" x:Name="serverAddress"></Entry>            
-            
-            <Label Text="Включить автообновление трекеров" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-            <Switch x:Name="AutoUpdateEnable" IsToggled="false" VerticalOptions="Center" HorizontalOptions="End" Toggled="AutoUpdateEnable_Toggled" Scale="0.5"/>
-            
-            
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Margin="15">
+                <Label Text="Адрес сервера"></Label>
+                <Entry Text="http://private.opengts.com.ua:8080/track/Service" x:Name="serverAddress"></Entry>
+
+
+                <Grid Padding="0" ColumnSpacing="0" RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="40"/>
+                        <RowDefinition  Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Автообновление трекеров" Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Switch x:Name="AutoUpdateEnable" IsToggled="false" Toggled="AutoUpdateEnable_Toggled" Scale="1"  Grid.Column="1" Grid.Row="0"/>
+
+                    <Label x:Name="LblInterval" Text="Интервал, секунд" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" IsEnabled="False"/>
+                    <Editor x:Name="Interval" Grid.Column="1" Grid.Row="1" IsEnabled="False"/>
+
+
+                </Grid>    
+
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -18,8 +18,10 @@ namespace OpenGpsTracker
 		}
 
         private void AutoUpdateEnable_Toggled(object sender, ToggledEventArgs e)
-        {
+        {   
 
+            LblInterval.IsEnabled = (sender as Switch).IsToggled;
+            Interval.IsEnabled = (sender as Switch).IsToggled;
         }
     }
 }
