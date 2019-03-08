@@ -8,7 +8,6 @@
                 <Label Text="Адрес сервера"></Label>
                 <Entry Text="http://private.opengts.com.ua:8080/track/Service" x:Name="serverAddress"></Entry>
 
-
                 <Grid Padding="0" ColumnSpacing="0" RowSpacing="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -26,9 +25,12 @@
                     <Label x:Name="LblInterval" Text="Интервал, секунд" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" IsEnabled="False"/>
                     <Editor x:Name="Interval" Grid.Column="1" Grid.Row="1" IsEnabled="False"/>
 
+                </Grid>
 
-                </Grid>    
+                <Entry x:Name="Login" Text="Логин"/>
+                <Entry x:Name="Password" Text="Пароль" IsPassword="True"/>
 
+                <Button Text="Сохранить" HorizontalOptions="End"/>
 
             </StackLayout>
         </ScrollView>

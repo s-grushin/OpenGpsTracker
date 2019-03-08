@@ -14,6 +14,7 @@ namespace OpenGpsTracker
 	{
 		public MapPage ()
 		{
+            
 			InitializeComponent ();
 		}
 	}

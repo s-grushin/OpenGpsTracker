@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!--This xml file used for getting all avaliable trackers from vikas OpenGpsServer-->
+<GTSRequest command="dbget">
+  <Authorization account="" login="" user="admin" password=""/>
+  <Record table="Device" partial="true">
+    <Field name="accountID"></Field>
+    <Field name="description"/>
+    <Field name="isActive"/>
+  </Record>
+</GTSRequest>
+
