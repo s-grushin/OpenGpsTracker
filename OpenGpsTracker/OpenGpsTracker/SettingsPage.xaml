@@ -27,10 +27,10 @@
 
                 </Grid>
 
-                <Entry x:Name="Login" Text="Логин"/>
-                <Entry x:Name="Password" Text="Пароль" IsPassword="True"/>
+                <Entry x:Name="Login" Text="{Binding Login}" Placeholder="Логин"/>
+                <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Пароль" IsPassword="True"/>
 
-                <Button Text="Сохранить" HorizontalOptions="End"/>
+                <Button Text="Сохранить" HorizontalOptions="End" Command="{Binding Save}"/>
 
             </StackLayout>
         </ScrollView>

@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using OpenGpsTracker.Model;
+using OpenGpsTracker.ViewModel;
 
 namespace OpenGpsTracker
 {
@@ -22,6 +23,7 @@ namespace OpenGpsTracker
         public SettingsPage ()
 		{
 			InitializeComponent ();
+            this.BindingContext = new SettingsViewModel();
           
 		}
 

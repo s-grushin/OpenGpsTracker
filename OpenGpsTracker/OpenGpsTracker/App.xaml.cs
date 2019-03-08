@@ -7,6 +7,9 @@ namespace OpenGpsTracker
 {
     public partial class App : Application
     {
+        public const string DATABASE_NAME = "opengps.db";
+        
+
         public App()
         {
             InitializeComponent();
