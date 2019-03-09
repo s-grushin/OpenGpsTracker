@@ -8,6 +8,7 @@ namespace OpenGpsTracker
     public partial class App : Application
     {
         public const string DATABASE_NAME = "opengps.db";
+        public const string GPSSERVER_ADRESS = "http://private.opengts.com.ua:8080/track/Service";
         
 
         public App()

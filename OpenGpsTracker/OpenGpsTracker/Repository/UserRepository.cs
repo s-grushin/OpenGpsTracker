@@ -31,7 +31,9 @@ namespace OpenGpsTracker.Repository
 
         public User GetUserByLogin(string login)
         {
-            return database.Get<User>(login);
+            string sql = "SELECT * FROM Users WHERE login = ?";
+            User user = database.Query<User>(sql, login).FirstOrDefault<User>();
+            return user;
         }
 
 
