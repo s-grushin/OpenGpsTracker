@@ -1,4 +1,5 @@
-﻿using OpenGpsTracker.Model;
+﻿using OpenGpsTracker.Interfaces;
+using OpenGpsTracker.Model;
 using OpenGpsTracker.Repository;
 using OpenGpsTracker.Services;
 using System;
@@ -13,7 +14,7 @@ using Xamarin.Forms;
 
 namespace OpenGpsTracker.ViewModel
 {
-    public class SettingsViewModel
+    public class SettingsViewModel : INotifyPropertyChanged
     {
         public ICommand Save { get; }
         public ICommand Authentication { get; }
@@ -21,11 +22,16 @@ namespace OpenGpsTracker.ViewModel
         public string Login { get; set; }
         public string Password { get; set; }
 
+        public List<Tracker> AvaliableTrackers { get; set; }
+
         public SettingsViewModel()
         {
             Save = new Command(SaveUserSettings);
             Authentication = new Command(AuthenticationProcess);
+
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public async void AuthenticationProcess()
         {
@@ -72,13 +78,75 @@ namespace OpenGpsTracker.ViewModel
 
             var result = await response.Content.ReadAsStringAsync();
 
-            var a = 1;
 
+            //RESPONSE EXAMPLE
+            //<?xml version='1.0' encoding='UTF-8' standalone='no' ?>
+            //<GTSResponse command="dbget" result="success">
+            //    <Record table="Device" partial="true">
+            //        <Field name="accountID" primaryKey="true"><![CDATA[tst]]></Field>
+            //        <Field name="deviceID" primaryKey="true"><![CDATA[867273021022871]]></Field>
+            //        <Field name="isActive">true</Field>
+            //        <Field name="description"><![CDATA[Test 207 [Денис]]]></Field>
+            //    </Record>
+            //</GTSResponse>           
 
+            //Reading result and create objects
 
+            doc.LoadXml(result);
+            xRoot = doc.DocumentElement;
+            if (xRoot.Attributes.GetNamedItem("result").Value == "error")
+            {
+                //ERROR RESPONSE EXAMPLE
+                //<?xml version='1.0' encoding='UTF-8' standalone='no' ?>
+                //<GTSResponse command="dbget" result="error">
+                //   <Message code="AU0010"><![CDATA[Authorization failed]]></Message>
+                //</GTSResponse>
 
+                XmlNode ElementMessage = xRoot.FirstChild;
+                string errorCode = ElementMessage.Attributes.GetNamedItem("code").Value;
+                string message = ElementMessage.InnerText;
 
-        }
+                string messageForUser = string.Empty;
+
+                if (message == "Authorization failed")
+                {
+                    messageForUser = "Не правильный логин или пароль!";
+                }
+                else
+                {
+                    messageForUser = string.Format("Ошибка связи с сервером. Message: {0}, ErrorCode: {1}", message, errorCode);
+                }                 
+
+                DependencyService.Get<IMessage>().ShortAlert(messageForUser);
+
+                return;
+            }
+
+            AvaliableTrackers = new List<Tracker>();
+
+            foreach (XmlNode device in xRoot)
+            {
+                Tracker tracker = new Tracker();
+                tracker.Enabled = true;
+
+                foreach (XmlNode field in device)
+                {
+                    string fieldName = field.Attributes.GetNamedItem("name").Value;
+
+                    if (fieldName == "deviceID")
+                        tracker.DeviceID = field.InnerText;
+
+                    if (fieldName == "description")
+                        tracker.Description = field.InnerText;
+
+                }
+
+                AvaliableTrackers.Add(tracker);
+
+                OnPropertyChanged("AvaliableTrackers");
+            }
+
+            }
 
 
         public void SaveUserSettings()
@@ -90,6 +158,13 @@ namespace OpenGpsTracker.ViewModel
             UserRepository userrep = new UserRepository(App.DATABASE_NAME);
             userrep.SaveUser(user);
 
+        }
+
+
+        protected void OnPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
     }

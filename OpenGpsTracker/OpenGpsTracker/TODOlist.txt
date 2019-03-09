@@ -1,1 +1,2 @@
 1. Implement sqllite for IOS
+2. Try to deserialise xml response from server to object

@@ -7,6 +7,10 @@ namespace OpenGpsTracker.Model
     public class Tracker
     {
         public int Id { get; set; }
+        public string DeviceID { get; set; } //Server device id
         public string Description { get; set; }
+        public bool Enabled { get; set; } //define will show on map or not
+        public bool AutoUpdateEnable { get; set; }
+        public int AutoUpdateInterval { get; set; } //Seconds
     }
 }

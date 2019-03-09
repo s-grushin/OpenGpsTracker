@@ -16,23 +16,12 @@ namespace OpenGpsTracker
 	public partial class SettingsPage : ContentPage
 	{
 
-        public static List<Tracker> Trackers { get; set; }
-        public string[] Phones { get; set; }
-
-
         public SettingsPage ()
 		{
 			InitializeComponent ();
             this.BindingContext = new SettingsViewModel();
           
 		}
-
-        private void AutoUpdateEnable_Toggled(object sender, ToggledEventArgs e)
-        {   
-            
-            LblInterval.IsEnabled = (sender as Switch).IsToggled;
-            Interval.IsEnabled = (sender as Switch).IsToggled;
-        }
 
     }
 }
