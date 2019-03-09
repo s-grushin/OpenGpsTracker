@@ -10,16 +10,14 @@ namespace OpenGpsTracker.Model
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        [Unique]
         public string Login { get; set; }
         public string Password { get; set; }
-        //public List<TrackerUserSettings> Trackers { get; set; } //Personal user trackers settings
+        public bool Current { get; set; }
 
-    }
+        [Ignore]
+        public List<Tracker> Trackers { get; set; } //Personal user trackers settings
 
-    public class TrackerUserSettings
-    {
-        public Tracker Tracker { get; set; }
-        public string ColorHex { get; set; }
     }
 
 }

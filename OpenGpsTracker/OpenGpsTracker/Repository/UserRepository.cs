@@ -17,6 +17,7 @@ namespace OpenGpsTracker.Repository
             string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath(filename);
             database = new SQLiteConnection(databasePath);
             database.CreateTable<User>();
+            database.CreateTable<Tracker>();
         }
 
         public IEnumerable<User> GetUsers()
@@ -36,18 +37,36 @@ namespace OpenGpsTracker.Repository
             return user;
         }
 
-
-        public int SaveUser(User user)
+        public User GetCurrentUser()
         {
+            string sql = "SELECT * FROM Users WHERE Current = ?";
+            User user = database.Query<User>(sql, true).FirstOrDefault<User>();
+            return user;
+        }
+
+        public void SaveUser(User user)
+        {            
+
             if (user.Id != 0)
             {
                 database.Update(user);
-                return user.Id;
             }
             else
             {
-                return database.Insert(user);
+                //Set users to inactive
+                database.Execute("UPDATE Users SET Current = ?", false);
+
+                //add new user
+                database.Insert(user);
+                //get id of new user
+                int lastID = database.ExecuteScalar<int>("SELECT MAX(ID) FROM Users");
+                //fill user id in all avaliable user trackers
+                user.Trackers.ForEach(tr => tr.UserID = lastID);
+                //add trackers to database
+                database.InsertAll(user.Trackers);
+                
             }
+
         }
 
 

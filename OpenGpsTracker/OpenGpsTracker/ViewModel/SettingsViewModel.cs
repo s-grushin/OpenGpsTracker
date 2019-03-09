@@ -1,7 +1,6 @@
 ﻿using OpenGpsTracker.Interfaces;
 using OpenGpsTracker.Model;
 using OpenGpsTracker.Repository;
-using OpenGpsTracker.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -154,9 +153,13 @@ namespace OpenGpsTracker.ViewModel
             User user = new User();
             user.Login = this.Login;
             user.Password = this.Password;
+            user.Trackers = AvaliableTrackers;
+            user.Current = true;
 
             UserRepository userrep = new UserRepository(App.DATABASE_NAME);
             userrep.SaveUser(user);
+
+            App.CurrentUser = user;
 
         }
 
