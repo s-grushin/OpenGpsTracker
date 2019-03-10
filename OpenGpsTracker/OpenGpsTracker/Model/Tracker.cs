@@ -15,6 +15,16 @@ namespace OpenGpsTracker.Model
         public string Description { get; set; }
         public bool Enabled { get; set; } //define will show on map or not
         public bool AutoUpdateEnable { get; set; }
-        public int AutoUpdateInterval { get; set; } //Seconds
+        public int AutoUpdateInterval { get; set; }
+        //public int AutoUpdateInterval
+        //{
+        //    get
+        //    {
+        //        if (AutoUpdateInterval == 0)
+        //            return 30; //Default 30 seconds
+        //        else return AutoUpdateInterval;
+        //    }
+        //    set { AutoUpdateInterval = value; }
+        //} //Seconds
     }
 }

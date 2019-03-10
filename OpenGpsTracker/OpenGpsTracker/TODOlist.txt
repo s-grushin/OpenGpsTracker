@@ -1,3 +1,5 @@
 1. Implement sqllite for IOS
 2. Try to deserialise xml response from server to object
 3. Add display name for tracker
+4. Do saving user in transaction
+5. Add profile changing system. Restoring saved user settings 

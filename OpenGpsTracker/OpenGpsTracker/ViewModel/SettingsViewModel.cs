@@ -20,6 +20,7 @@ namespace OpenGpsTracker.ViewModel
 
         public string Login { get; set; }
         public string Password { get; set; }
+        public int UserID { get; private set; }
 
         public List<Tracker> AvaliableTrackers { get; set; }
 
@@ -28,9 +29,13 @@ namespace OpenGpsTracker.ViewModel
             Save = new Command(SaveUserSettings);
             Authentication = new Command(AuthenticationProcess);
 
+            //show data of current user
+            ShowCurrentUser();          
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+           
 
         public async void AuthenticationProcess()
         {
@@ -127,6 +132,7 @@ namespace OpenGpsTracker.ViewModel
             {
                 Tracker tracker = new Tracker();
                 tracker.Enabled = true;
+                tracker.AutoUpdateInterval = 30; //Default interval is 30sec
 
                 foreach (XmlNode field in device)
                 {
@@ -153,6 +159,7 @@ namespace OpenGpsTracker.ViewModel
             User user = new User();
             user.Login = this.Login;
             user.Password = this.Password;
+            user.Id = this.UserID;
             user.Trackers = AvaliableTrackers;
             user.Current = true;
 
@@ -163,6 +170,17 @@ namespace OpenGpsTracker.ViewModel
 
         }
 
+        private void ShowCurrentUser()
+        {
+            User user = App.CurrentUser;
+            if (user != null)
+            {
+                Login = user.Login;
+                Password = user.Password;
+                UserID = user.Id;
+                AvaliableTrackers = user.Trackers;
+            }
+        }
 
         protected void OnPropertyChanged(string propName)
         {

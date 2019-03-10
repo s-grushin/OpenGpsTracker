@@ -1,4 +1,5 @@
-﻿using OpenGpsTracker.Model;
+﻿using OpenGpsTracker.Interfaces;
+using OpenGpsTracker.Model;
 using OpenGpsTracker.Repository;
 using System;
 using Xamarin.Forms;
@@ -26,7 +27,13 @@ namespace OpenGpsTracker
         {
 
             UserRepository userRepository = new UserRepository(DATABASE_NAME);
-            App.CurrentUser = userRepository.GetCurrentUser();
+            User user = userRepository.GetCurrentUser();
+            if (user == null)
+            {
+                string message = "Выполните вход в настройках приложения!";
+                DependencyService.Get<IMessage>().LongAlert(message);
+            }
+            App.CurrentUser = user;
 
         }
 

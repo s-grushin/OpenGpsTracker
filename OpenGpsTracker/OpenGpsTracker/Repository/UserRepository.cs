@@ -39,8 +39,15 @@ namespace OpenGpsTracker.Repository
 
         public User GetCurrentUser()
         {
-            string sql = "SELECT * FROM Users WHERE Current = ?";
-            User user = database.Query<User>(sql, true).FirstOrDefault<User>();
+            string sqluser = "SELECT * FROM Users WHERE Current = ?";
+            User user = database.Query<User>(sqluser, true).FirstOrDefault<User>();
+
+            if (user != null)
+            {
+                string sqltracker = "SELECT * FROM Trackers WHERE UserID = ?";
+                user.Trackers = database.Query<Tracker>(sqltracker, user.Id);
+            }           
+
             return user;
         }
 

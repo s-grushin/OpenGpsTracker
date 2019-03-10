@@ -30,10 +30,11 @@
                                             </Grid.RowDefinitions>
 
                                             <Label Text="Автообновление" Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                                            <Switch x:Name="AutoUpdateEnabled" IsToggled="false" Scale="1"  Grid.Column="1" Grid.Row="0"/>
+                                            <Switch x:Name="AutoUpdateEnabled" IsToggled="{Binding AutoUpdateEnable}" Scale="1"  Grid.Column="1" Grid.Row="0"/>
 
-                                            <Label Text="Интервал, секунд" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" BindingContext="{x:Reference Name=AutoUpdateEnabled}" IsEnabled="{Binding Path=IsToggled}"/>
-                                            <Editor x:Name="Interval" Text="30" Grid.Column="1" Grid.Row="1" BindingContext="{x:Reference Name=AutoUpdateEnabled}" IsEnabled="{Binding Path=IsToggled}"/>
+                                            <Label Text="Интервал, секунд" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                            <!--<Entry x:Name="Interval" Text="{Binding Test}" Grid.Column="1" Grid.Row="1" BindingContext="{x:Reference Name=AutoUpdateEnabled}" IsEnabled="{Binding Path=IsToggled}"/>-->
+                                            <Entry Text="{Binding AutoUpdateInterval}" Grid.Column="1" Grid.Row="1"/>
                                         </Grid>
 
                                     </StackLayout>
